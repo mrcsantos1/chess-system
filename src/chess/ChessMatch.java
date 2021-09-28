@@ -200,6 +200,7 @@ public class ChessMatch {
         this.placeNewPiece('a', 1, new Rook(board, Color.WHITE));
         this.placeNewPiece('b', 1, new Knight(board, Color.WHITE));
         this.placeNewPiece('c', 1, new Bishop(board, Color.WHITE));
+        this.placeNewPiece('d', 1, new Queen(board, Color.WHITE));
         this.placeNewPiece('e', 1, new King(board, Color.WHITE));
         this.placeNewPiece('f', 1, new Bishop(board, Color.WHITE));
         this.placeNewPiece('g', 1, new Knight(board, Color.WHITE));
@@ -216,6 +217,7 @@ public class ChessMatch {
         this.placeNewPiece('a', 8, new Rook(board, Color.BLACK));
         this.placeNewPiece('b', 8, new Knight(board, Color.BLACK));
         this.placeNewPiece('c', 8, new Bishop(board, Color.BLACK));
+        this.placeNewPiece('d', 8, new Queen(board, Color.BLACK));
         this.placeNewPiece('e', 8, new King(board, Color.BLACK));
         this.placeNewPiece('f', 8, new Bishop(board, Color.BLACK));
         this.placeNewPiece('g', 8, new Knight(board, Color.BLACK));
