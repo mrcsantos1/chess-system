@@ -18,7 +18,7 @@ public class Program {
         List<ChessPiece> captured = new ArrayList<>();
 
 
-        while (!chessMatch.isCheckMate()) {
+        while (chessMatch.isCheckMate()) {
             try {
                 UI.clearScreen();
 
