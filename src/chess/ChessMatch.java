@@ -92,7 +92,58 @@ public class ChessMatch {
             this.capturedPieces.add(capturedPiece);
         }
 
+        // special move castling king side move
+        if (p instanceof King && target.getColumn() == source.getColumn() + 2) {
+            Position sourceT = new Position(source.getRow(), source.getColumn() + 3);
+            Position targetT = new Position(source.getRow(), source.getColumn() + 1);
+            ChessPiece rook = (ChessPiece) board.removePiece(sourceT);
+            this.board.placePiece(rook, targetT);
+            rook.increaseMoveCount();
+        }
+
+        // special move castling queen side move
+        if (p instanceof King && target.getColumn() == source.getColumn() - 2) {
+            Position sourceT = new Position(source.getRow(), source.getColumn() - 4);
+            Position targetT = new Position(source.getRow(), source.getColumn() - 1);
+            ChessPiece rook = (ChessPiece) board.removePiece(sourceT);
+            this.board.placePiece(rook, targetT);
+            rook.increaseMoveCount();
+        }
+
+
         return capturedPiece;
+    }
+
+    private void undoMove(Position source, Position target, Piece capturedPiece) {
+        ChessPiece p = (ChessPiece) this.board.removePiece(target);
+        p.decreaseMoveCount();
+
+        this.board.placePiece(p, source);
+
+        if (capturedPiece != null) {
+            this.board.placePiece(capturedPiece, target);
+            this.capturedPieces.remove(capturedPiece);
+            this.piecesOnTheBoard.add(capturedPiece);
+        }
+
+
+        // special move castling king side move
+        if (p instanceof King && target.getColumn() == source.getColumn() + 2) {
+            Position sourceT = new Position(source.getRow(), source.getColumn() + 3);
+            Position targetT = new Position(source.getRow(), source.getColumn() + 1);
+            ChessPiece rook = (ChessPiece) board.removePiece(targetT);
+            this.board.placePiece(rook, sourceT);
+            rook.decreaseMoveCount();
+        }
+
+        // special move castling queen side move
+        if (p instanceof King && target.getColumn() == source.getColumn() - 2) {
+            Position sourceT = new Position(source.getRow(), source.getColumn() - 4);
+            Position targetT = new Position(source.getRow(), source.getColumn() - 1);
+            ChessPiece rook = (ChessPiece) board.removePiece(targetT);
+            this.board.placePiece(rook, sourceT);
+            rook.decreaseMoveCount();
+        }
     }
 
     private void validateSourcePosition(Position position) {
@@ -120,19 +171,6 @@ public class ChessMatch {
         this.currentPlayer = (this.currentPlayer == Color.WHITE) ? Color.BLACK : Color.WHITE;
     }
 
-
-    private void undoMove(Position source, Position target, Piece capturedPiece) {
-        ChessPiece p = (ChessPiece) this.board.removePiece(target);
-        p.decreaseMoveCount();
-
-        this.board.placePiece(p, source);
-
-        if (capturedPiece != null) {
-            this.board.placePiece(capturedPiece, target);
-            this.capturedPieces.remove(capturedPiece);
-            this.piecesOnTheBoard.add(capturedPiece);
-        }
-    }
 
     private Color opponent(Color color) {
         return (color == Color.WHITE) ? Color.BLACK : Color.WHITE;
@@ -201,7 +239,7 @@ public class ChessMatch {
         this.placeNewPiece('b', 1, new Knight(board, Color.WHITE));
         this.placeNewPiece('c', 1, new Bishop(board, Color.WHITE));
         this.placeNewPiece('d', 1, new Queen(board, Color.WHITE));
-        this.placeNewPiece('e', 1, new King(board, Color.WHITE));
+        this.placeNewPiece('e', 1, new King(board, Color.WHITE, this));
         this.placeNewPiece('f', 1, new Bishop(board, Color.WHITE));
         this.placeNewPiece('g', 1, new Knight(board, Color.WHITE));
         this.placeNewPiece('h', 1, new Rook(board, Color.WHITE));
@@ -218,7 +256,7 @@ public class ChessMatch {
         this.placeNewPiece('b', 8, new Knight(board, Color.BLACK));
         this.placeNewPiece('c', 8, new Bishop(board, Color.BLACK));
         this.placeNewPiece('d', 8, new Queen(board, Color.BLACK));
-        this.placeNewPiece('e', 8, new King(board, Color.BLACK));
+        this.placeNewPiece('e', 8, new King(board, Color.BLACK, this));
         this.placeNewPiece('f', 8, new Bishop(board, Color.BLACK));
         this.placeNewPiece('g', 8, new Knight(board, Color.BLACK));
         this.placeNewPiece('h', 8, new Rook(board, Color.BLACK));
