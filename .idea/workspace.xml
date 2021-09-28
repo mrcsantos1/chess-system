@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3f3cd84b-eb40-411b-b775-de0fb6d37c04" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/chess/pieces/Bishop.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/chess/pieces/Knight.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/chess/ChessMatch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/chess/ChessMatch.java" afterDir="false" />
     </list>
@@ -80,7 +80,7 @@
       <updated>1632741201763</updated>
       <workItem from="1632741203316" duration="14177000" />
       <workItem from="1632765046019" duration="5680000" />
-      <workItem from="1632825650983" duration="420000" />
+      <workItem from="1632825650983" duration="839000" />
     </task>
     <task id="LOCAL-00001" summary="158">
       <created>1632746477914</created>
